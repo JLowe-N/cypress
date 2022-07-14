@@ -21,7 +21,7 @@ describe('Basic Practice', () => {
     it('should put a new item as the last item in the "Unpacked Items" list', () => {
       cy.get('[data-test="new-item-input"]').type('Kegerator')
       cy.get('[data-test="add-item"]').click()
-      cy.get('[data-test="items-unpacked"]').within(() => cy.find('li').last().contains('Kegerator'))
+      cy.get('[data-test="items-unpacked"]').should('contain', 'Kegerator')
     });
   });
 
@@ -42,7 +42,8 @@ describe('Basic Practice', () => {
     describe('Remove all', () => {
       it('should remove all of the items', () => {
         cy.get('[data-test="remove-all"]').click()
-        cy.contains('No items to show', {timeout:15000})
+        cy.get('[data-test="items-unpacked"]').should('contain', 'No items to show')
+        cy.get('[data-test="items-packed"]').should('contain', 'No items to show')
       });
     });
 
